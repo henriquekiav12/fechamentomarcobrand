@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marco Branding Consulting — Proposta Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #f8f9fb;
+    --card:     #ffffff;
+    --border:   #e4e7ec;
+    --text-1:   #0f1117;
+    --text-2:   #4b5563;
+    --text-3:   #9ca3af;
+    --accent:   #6d28d9;
+    --accent-l: #ede9fe;
+    --green:    #059669;
+    --green-l:  #d1fae5;
+    --gold:     #b45309;
+    --gold-l:   #fef3c7;
+    --shine-1:  #6366f1;
+    --shine-2:  #ec4899;
+    --shine-3:  #14b8a6;
+    --rb-speed: 2.4s;
+    --c1: 0 100% 63%;
+    --c2: 270 100% 63%;
+    --c3: 210 100% 63%;
+    --c4: 195 100% 63%;
+    --c5: 90 100% 63%;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    width:100%; min-height:100vh; overflow-x:hidden;
+    background:var(--bg); font-family:'Inter',sans-serif;
+    color:var(--text-1); -webkit-font-smoothing:antialiased;
+  }
+
+  /* BG */
+  .bg-wrap {
+    position:fixed; inset:0; z-index:0;
+    background:linear-gradient(145deg,#f0eeff 0%,#faf8ff 40%,#edfaf6 70%,#f0f6ff 100%);
+    background-size:400% 400%; animation:bgShift 14s ease infinite;
+  }
+  @keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  .bg-wrap::before {
+    content:''; position:absolute; width:800px; height:800px; border-radius:50%;
+    background:radial-gradient(circle,rgba(99,102,241,0.1),transparent 70%);
+    top:-200px; left:-150px; animation:orbA 18s ease-in-out infinite alternate;
+  }
+  .bg-wrap::after {
+    content:''; position:absolute; width:700px; height:700px; border-radius:50%;
+    background:radial-gradient(circle,rgba(20,184,166,0.08),transparent 70%);
+    bottom:-150px; right:-100px; animation:orbB 20s ease-in-out infinite alternate;
+  }
+  @keyframes orbA { to{transform:translate(80px,60px)} }
+  @keyframes orbB { to{transform:translate(-60px,-50px)} }
+
+  /* PAGE */
+  .page {
+    position:relative; z-index:1;
+    padding:64px 24px 80px;
+    max-width:780px; margin:0 auto;
+  }
+
+  /* HEADER ANIM */
+  .anim-item {
+    opacity:0; filter:blur(12px); transform:translateY(14px);
+    animation:blurSlideIn 1.1s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  .anim-item:nth-child(1){animation-delay:0.08s}
+  .anim-item:nth-child(2){animation-delay:0.20s}
+  .anim-item:nth-child(3){animation-delay:0.33s}
+  .anim-item:nth-child(4){animation-delay:0.46s}
+  .anim-item:nth-child(5){animation-delay:0.58s}
+  @keyframes blurSlideIn {
+    0%  {opacity:0;filter:blur(12px);transform:translateY(14px)}
+    60% {opacity:1;filter:blur(0);transform:translateY(-3px)}
+    80% {transform:translateY(2px)}
+    100%{opacity:1;filter:blur(0);transform:translateY(0)}
+  }
+
+  /* HEADER */
+  .header { text-align:center; margin-bottom:12px; }
+  .eyebrow {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--accent); margin-bottom:20px;
+    background:var(--accent-l); border:1px solid rgba(109,40,217,0.18);
+    padding:5px 14px; border-radius:100px;
+  }
+  .header h1 {
+    font-size:44px; font-weight:700; color:var(--text-1);
+    line-height:1.12; margin-bottom:16px; letter-spacing:-1.8px;
+  }
+  .header h1 span { color:var(--accent); }
+  .header p {
+    font-size:15px; color:var(--text-2);
+    max-width:520px; margin:0 auto 16px; line-height:1.8;
+  }
+
+  /* TOGGLE */
+  .toggle-row { display:flex; justify-content:center; margin-bottom:48px; }
+  .toggle-wrap {
+    display:inline-flex; align-items:center; gap:16px;
+    background:var(--card); border:1px solid var(--border);
+    border-radius:100px; padding:10px 22px;
+    box-shadow:0 1px 6px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.04);
+  }
+  .toggle-label {
+    font-size:13px; font-weight:600; color:var(--text-3);
+    transition:all 0.25s; white-space:nowrap; cursor:pointer; letter-spacing:0.1px; line-height:1.5;
+  }
+  .toggle-label.active.half-label { color:var(--accent); }
+  .toggle-label.active.pix-label  { color:var(--green); }
+  .toggle-label small {
+    display:block; font-size:10px; font-weight:500;
+    letter-spacing:0.3px; opacity:0.8; margin-top:1px;
+  }
+  .switch-wrap { position:relative; display:flex; align-items:center; }
+  .switch-glow {
+    position:absolute; inset:-5px; border-radius:20px;
+    background:rgba(109,40,217,0.1); filter:blur(7px);
+    animation:glowPulse 2.2s ease-in-out infinite; pointer-events:none;
+  }
+  .switch-wrap.pix .switch-glow { background:rgba(5,150,105,0.12); }
+  @keyframes glowPulse { 0%,100%{opacity:0.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.12)} }
+  .switch-track {
+    width:48px; height:26px; border-radius:13px;
+    background:rgba(109,40,217,0.12); border:1.5px solid rgba(109,40,217,0.3);
+    position:relative; cursor:pointer; outline:none; flex-shrink:0;
+    transition:all 0.35s; box-shadow:0 0 0 3px rgba(109,40,217,0.06);
+  }
+  .switch-track.pix { background:rgba(5,150,105,0.12); border-color:rgba(5,150,105,0.35); box-shadow:0 0 0 3px rgba(5,150,105,0.06); }
+  .switch-thumb {
+    position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+    background:#fff; box-shadow:0 1px 6px rgba(0,0,0,0.18);
+    transition:transform 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .switch-track.pix .switch-thumb { transform:translateX(22px); }
+
+  /* SHINE WRAP */
+  .shine-wrap {
+    position:relative; border-radius:22px; padding:1.5px;
+    opacity:0; transform:translateY(24px); filter:blur(6px);
+    transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),
+               transform 0.7s cubic-bezier(0.22,1,0.36,1),
+               filter 0.7s cubic-bezier(0.22,1,0.36,1);
+    transition-delay:0.2s;
+  }
+  .shine-wrap.card-visible { opacity:1; transform:translateY(0); filter:blur(0); }
+  .shine-wrap:hover { transform:translateY(-4px); }
+
+  /* CARD LINES */
+  .card-lines { position:absolute; inset:0; border-radius:22px; pointer-events:none; overflow:hidden; z-index:2; }
+  .cl { position:absolute; background:rgba(109,40,217,0.12); }
+  .cl-h { left:0; right:0; height:1px; transform:scaleX(0); transform-origin:0% 50%; }
+  .cl-v { top:0; bottom:0; width:1px; transform:scaleY(0); transform-origin:50% 0%; }
+  .card-visible .cl-h { animation:drawX 0.6s ease forwards; }
+  .card-visible .cl-v { animation:drawY 0.7s ease forwards; }
+  .cl:nth-child(1){top:0;   animation-delay:0.25s}
+  .cl:nth-child(2){bottom:0;animation-delay:0.32s}
+  .cl:nth-child(3){left:0;  animation-delay:0.28s}
+  .cl:nth-child(4){right:0; animation-delay:0.36s}
+  @keyframes drawX { to{transform:scaleX(1)} }
+  @keyframes drawY { to{transform:scaleY(1)} }
+
+  /* SHINE BORDER */
+  .shine-border { position:absolute; inset:0; border-radius:22px; overflow:hidden; pointer-events:none; }
+  .shine-spin {
+    position:absolute; inset:-100%;
+    background:conic-gradient(from 0deg,transparent 0deg,var(--shine-1) 60deg,var(--shine-2) 120deg,var(--shine-3) 180deg,transparent 240deg);
+    animation:spinBorder 4s linear infinite; opacity:1; transition:opacity 0.4s;
+  }
+  @keyframes spinBorder { to{transform:rotate(360deg)} }
+
+  /* CARD */
+  .card {
+    position:relative; border-radius:21px;
+    background:var(--card); border:1.5px solid rgba(109,40,217,0.2);
+    padding:40px 36px 36px;
+    display:flex; flex-direction:column;
+    box-shadow:0 8px 40px rgba(109,40,217,0.1), 0 2px 8px rgba(0,0,0,0.04);
+    transition:box-shadow 0.3s;
+  }
+  .shine-wrap:hover .card { box-shadow:0 16px 56px rgba(109,40,217,0.14), 0 4px 16px rgba(0,0,0,0.06); }
+
+  /* TOP BADGE */
+  .top-badge {
+    position:absolute; top:-15px; left:50%; transform:translateX(-50%);
+    background:linear-gradient(135deg,#5b21b6,#7c3aed);
+    color:#fff; font-size:10.5px; font-weight:700;
+    padding:5px 20px; border-radius:100px; letter-spacing:1px; white-space:nowrap;
+    text-transform:uppercase; box-shadow:0 4px 20px rgba(109,40,217,0.4);
+    display:flex; align-items:center; gap:7px;
+  }
+
+  /* PLAN HEADER */
+  .plan-header { text-align:center; margin-bottom:28px; }
+  .plan-tag { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+  .plan-title { font-size:28px; font-weight:700; color:var(--text-1); letter-spacing:-0.6px; line-height:1.2; margin-bottom:10px; }
+  .plan-subtitle { font-size:14px; color:var(--text-2); line-height:1.7; max-width:520px; margin:0 auto; }
+
+  /* PRICE BLOCK */
+  .price-block {
+    display:flex; flex-direction:column; align-items:center; gap:4px;
+    background:linear-gradient(135deg,var(--accent-l),rgba(237,233,254,0.4));
+    border:1px solid rgba(109,40,217,0.15); border-radius:16px;
+    padding:24px 32px; margin-bottom:28px; text-align:center;
+  }
+  .price-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+  .price-row { display:flex; align-items:flex-start; gap:4px; }
+  .currency { font-size:20px; font-weight:600; color:var(--text-3); margin-top:10px; }
+  .amount { font-size:60px; font-weight:700; color:var(--accent); letter-spacing:-3px; line-height:1; }
+  .price-note { font-size:12px; color:var(--text-3); margin-top:4px; line-height:1.6; }
+  .price-note strong { color:var(--text-2); }
+
+  /* PAYMENT INFO BOX */
+  .payment-info {
+    background:#fafafa; border:1px solid var(--border);
+    border-radius:12px; padding:14px 18px; margin-bottom:28px;
+    font-size:12.5px; color:var(--text-2); line-height:1.7;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .payment-info svg { flex-shrink:0; margin-top:2px; }
+
+  /* SEPARATOR */
+  .sep { height:1px; background:var(--border); margin:24px 0; }
+
+  /* SECTION */
+  .section-label {
+    font-size:9.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+    color:var(--text-3); margin-bottom:12px; margin-top:4px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .section-label::after {
+    content:''; flex:1; height:1px; background:var(--border);
+  }
+
+  /* FEATURES */
+  .features { list-style:none; margin-bottom:4px; }
+  .features li {
+    display:flex; align-items:flex-start; gap:11px;
+    font-size:13px; color:var(--text-2); padding:5px 0; line-height:1.5;
+  }
+  .features li.hi { color:var(--text-1); font-weight:500; }
+  .features li small { display:block; font-size:11px; color:var(--text-3); margin-top:1px; }
+  .ck {
+    width:18px; height:18px; border-radius:50%; flex-shrink:0; margin-top:1px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ck.purple { background:var(--accent-l); border:1px solid rgba(109,40,217,0.25); }
+  .ck.green  { background:var(--green-l);  border:1px solid rgba(5,150,105,0.25); }
+  .ck.gold   { background:var(--gold-l);   border:1px solid rgba(180,83,9,0.22); }
+  .ck.blue   { background:#eff6ff;         border:1px solid rgba(37,99,235,0.22); }
+
+  /* VITALITY BANNER */
+  .vitality-banner {
+    background:linear-gradient(135deg,#faf7ff,#f0fdf4);
+    border:1px solid rgba(109,40,217,0.12);
+    border-radius:14px; padding:18px 20px; margin:24px 0;
+    display:flex; gap:14px; align-items:flex-start;
+  }
+  .vitality-banner .icon { font-size:22px; flex-shrink:0; line-height:1; }
+  .vitality-banner h4 { font-size:13px; font-weight:700; color:var(--text-1); margin-bottom:5px; }
+  .vitality-banner p  { font-size:12px; color:var(--text-2); line-height:1.7; }
+
+  /* DEADLINE BADGE */
+  .deadline-row {
+    display:flex; gap:12px; margin-bottom:28px;
+  }
+  .deadline-badge {
+    flex:1; background:#f8f9fb; border:1px solid var(--border);
+    border-radius:12px; padding:14px 16px; text-align:center;
+  }
+  .deadline-badge .db-num { font-size:26px; font-weight:700; color:var(--accent); letter-spacing:-1px; line-height:1; }
+  .deadline-badge .db-label { font-size:10px; font-weight:600; color:var(--text-3); letter-spacing:1.5px; text-transform:uppercase; margin-top:4px; }
+
+  /* RAINBOW BUTTON */
+  @keyframes rainbow-move { 0%{background-position:0% center,0% center,0% center} 100%{background-position:200% center,200% center,200% center} }
+  @keyframes rainbow-glow { 0%{background-position:0%} 100%{background-position:200%} }
+  .cta-btn {
+    width:100%; position:relative;
+    display:inline-flex; align-items:center; justify-content:center;
+    height:52px; border-radius:12px;
+    font-family:'Inter',sans-serif; font-size:14px; font-weight:600; letter-spacing:0.4px;
+    cursor:pointer; border:1.5px solid transparent;
+    transition:color 0.3s ease,transform 0.2s ease;
+    background-clip:padding-box,border-box,border-box;
+    background-origin:border-box; background-size:200% auto;
+    background-image:
+      linear-gradient(#fff,#fff),
+      linear-gradient(#fff 50%,rgba(255,255,255,0.4) 80%,rgba(255,255,255,0)),
+      linear-gradient(90deg,hsl(var(--c1)),hsl(var(--c5)),hsl(var(--c3)),hsl(var(--c4)),hsl(var(--c2)));
+    animation:rainbow-move var(--rb-speed) linear infinite;
+    color:var(--text-1); overflow:visible;
+  }
+  .cta-btn::before {
+    content:''; position:absolute; bottom:-16%; left:50%; transform:translateX(-50%);
+    width:55%; height:18%;
+    background:linear-gradient(90deg,hsl(var(--c1)),hsl(var(--c5)),hsl(var(--c3)),hsl(var(--c4)),hsl(var(--c2)));
+    background-size:200%; animation:rainbow-glow var(--rb-speed) linear infinite;
+    filter:blur(9px); border-radius:50%; opacity:0.3; transition:opacity 0.3s; pointer-events:none;
+  }
+  .cta-btn:hover {
+    color:#fff;
+    background-image:
+      linear-gradient(#0d0d18,#0d0d18),
+      linear-gradient(#0d0d18 50%,rgba(13,13,24,0.4) 80%,rgba(13,13,24,0)),
+      linear-gradient(90deg,hsl(var(--c1)),hsl(var(--c5)),hsl(var(--c3)),hsl(var(--c4)),hsl(var(--c2)));
+    transform:translateY(-2px);
+  }
+  .cta-btn:hover::before { opacity:0.7; filter:blur(12px); }
+  .cta-btn:active { transform:scale(0.98)!important; }
+
+  /* DESC */
+  .desc { font-size:11.5px; color:var(--text-3); text-align:center; margin-top:12px; line-height:1.6; }
+
+  /* MODAL */
+  @keyframes modalIn { from{opacity:0;transform:scale(0.94) translateY(12px);filter:blur(4px)} to{opacity:1;transform:scale(1) translateY(0);filter:blur(0)} }
+  @keyframes clockSpin { to{transform:rotate(360deg)} }
+
+  @media(max-width:600px){
+    .page{ padding:48px 16px 64px; }
+    .card{ padding:28px 20px 24px; }
+    .header h1{ font-size:32px; }
+    .amount{ font-size:48px; }
+    .deadline-row{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-wrap"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow anim-item">✦ Marco Branding Consulting</div>
+    <h1 class="anim-item">Sua marca,<br><span>construída para durar.</span></h1>
+    <p class="anim-item">Uma proposta completa, pensada para transformar sua presença de mercado com identidade, estratégia e acompanhamento real.</p>
+  </div>
+
+  <!-- TOGGLE -->
+  <div class="toggle-row anim-item">
+    <div class="toggle-wrap">
+      <span class="toggle-label active half-label" id="label-half">
+        50% + 50%
+        <small>R$ 4.500 agora · R$ 4.500 na entrega</small>
+      </span>
+      <div class="switch-wrap" id="switch-wrap">
+        <div class="switch-glow"></div>
+        <button class="switch-track" id="toggle" onclick="handleToggle()">
+          <div class="switch-thumb"></div>
+        </button>
+      </div>
+      <span class="toggle-label pix-label" id="label-pix">
+        PIX à vista
+        <small>R$ 8.700 · economia de R$ 300</small>
+      </span>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="shine-wrap anim-item" id="main-card">
+    <div class="card-lines"><div class="cl cl-h"></div><div class="cl cl-h"></div><div class="cl cl-v"></div><div class="cl cl-v"></div></div>
+    <div class="shine-border"><div class="shine-spin"></div></div>
+    <div class="card">
+
+      <div class="top-badge">⭐ Pacote Completo Premium</div>
+
+      <!-- PLAN HEADER -->
+      <div class="plan-header">
+        <p class="plan-tag">Branding · Design · Estratégia</p>
+        <h2 class="plan-title">Transformação Completa<br>de Marca</h2>
+        <p class="plan-subtitle">Identidade visual, aplicações, catálogo inteligente e mentoria estratégica — tudo o que sua marca precisa para ganhar autoridade e crescer do jeito certo.</p>
+      </div>
+
+      <!-- PRICE -->
+      <div class="price-block" id="price-block">
+        <p class="price-label" id="price-label">Parcelado — 50% + 50%</p>
+        <div class="price-row">
+          <span class="currency">R$</span>
+          <span class="amount" id="amount">4.500</span>
+        </div>
+        <p class="price-note" id="price-note">
+          <strong>1ª parcela agora</strong> · 2ª parcela de R$ 4.500 somente na entrega final
+        </p>
+      </div>
+
+      <!-- PAYMENT INFO -->
+      <div class="payment-info" id="payment-info">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span id="payment-info-text">Prazo de entrega estimado em <strong>30 a 60 dias</strong>. O segundo pagamento é realizado <strong>apenas na entrega final do projeto</strong> — somente quando você estiver satisfeito com o resultado.</span>
+      </div>
+
+      <!-- PRAZO -->
+      <div class="deadline-row">
+        <div class="deadline-badge">
+          <div class="db-num">30</div>
+          <div class="db-label">dias estimado</div>
+        </div>
+        <div class="deadline-badge">
+          <div class="db-num">60</div>
+          <div class="db-label">dias prazo máx.</div>
+        </div>
+        <div class="deadline-badge">
+          <div class="db-num">6</div>
+          <div class="db-label">meses de mentoria</div>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <!-- IDENTIDADE VISUAL -->
+      <p class="section-label">🎨 Identidade Visual Completa</p>
+      <ul class="features">
+        <li class="hi"><span class="ck purple"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#6d28d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Logotipo exclusivo e profissional
+          <small>Criação do zero, com conceito alinhado à essência da marca</small>
+        </li>
+        <li><span class="ck purple"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#6d28d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Variações do logotipo (horizontal, vertical, símbolo, versão monocromática)</li>
+        <li><span class="ck purple"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#6d28d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Paleta de cores personalizada com variações primária e secundária</li>
+        <li><span class="ck purple"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#6d28d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tipografia oficial da marca (fontes primária e secundária)</li>
+        <li><span class="ck purple"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#6d28d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Brandbook completo — manual de identidade visual</li>
+        <li><span class="ck purple"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#6d28d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tom de voz e linguagem da marca</li>
+        <li><span class="ck purple"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#6d28d9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Arquivos finais em todos os formatos (AI, PDF, SVG, PNG, JPG)</li>
+      </ul>
+
+      <div class="sep"></div>
+
+      <!-- APLICAÇÃO -->
+      <p class="section-label">📦 Aplicação da Identidade Visual</p>
+      <ul class="features">
+        <li class="hi"><span class="ck gold"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Papelaria completa da marca
+          <small>Cartão de visita, papel timbrado, envelope personalizado</small>
+        </li>
+        <li><span class="ck gold"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pasta e apresentação corporativa com identidade visual aplicada</li>
+        <li><span class="ck gold"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Embalagem / caixa personalizada para produtos ou entregas</li>
+        <li><span class="ck gold"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Etiquetas, tags e selos personalizados</li>
+        <li><span class="ck gold"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Templates para redes sociais (feed, stories, highlights)</li>
+        <li><span class="ck gold"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Assinatura de e-mail profissional</li>
+        <li><span class="ck gold"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#b45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Banner digital e material para WhatsApp Business</li>
+      </ul>
+
+      <div class="sep"></div>
+
+      <!-- CATÁLOGO -->
+      <p class="section-label">🛒 Catálogo Inteligente com Painel Admin</p>
+      <ul class="features">
+        <li class="hi"><span class="ck green"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Catálogo online premium, personalizado com a identidade visual
+          <small>Design premium e responsivo para qualquer dispositivo</small>
+        </li>
+        <li><span class="ck green"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Sistema de Realidade Aumentada — cliente visualiza o produto no ambiente dele</li>
+        <li><span class="ck green"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Filtros inteligentes por categoria, preço, cor, tamanho e disponibilidade</li>
+        <li class="hi"><span class="ck green"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Painel Admin exclusivo
+          <small>Adicionar, editar, pausar e excluir produtos de forma intuitiva — sem precisar de programador</small>
+        </li>
+        <li><span class="ck green"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Integração direta com WhatsApp para fechamento de vendas</li>
+        <li><span class="ck green"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Link personalizado para compartilhar com clientes</li>
+      </ul>
+
+      <div class="sep"></div>
+
+      <!-- MENTORIA -->
+      <p class="section-label">🎯 Mentoria Exclusiva — 6 meses</p>
+      <ul class="features">
+        <li class="hi"><span class="ck blue"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Acompanhamento pessoal e exclusivo via WhatsApp durante 6 meses
+          <small>Suporte real, com respostas estratégicas — não apenas suporte técnico</small>
+        </li>
+        <li><span class="ck blue"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>1 reunião de alinhamento por mês (até 6 reuniões no total)</li>
+        <li><span class="ck blue"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Planejamento e definição de campanhas de marketing</li>
+        <li><span class="ck blue"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Orientação sobre uso correto da marca em todos os canais</li>
+        <li><span class="ck blue"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Estratégia de posicionamento e autoridade de marca</li>
+        <li><span class="ck blue"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Análise de concorrência e diferenciação estratégica</li>
+        <li><span class="ck blue"><svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#1d4ed8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Um especialista em branding e marketing dedicado ao seu crescimento</li>
+      </ul>
+
+      <!-- VITALITY BANNER -->
+      <div class="vitality-banner">
+        <div class="icon">♾️</div>
+        <div>
+          <h4>Nosso serviço tem prazo. Nossa parceria, não.</h4>
+          <p>Acreditamos no poder do overdelivery — sempre entregaremos mais do que foi prometido. Após a entrega, seguimos ao seu lado no crescimento da marca. O sucesso de quem confia em nós é a nossa maior conquista.</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <button class="cta-btn" onclick="handleCta()">Quero começar agora</button>
+      <p class="desc" id="cta-desc">Pagamento seguro via PIX · Parcela inicial de R$ 4.500 · 2ª parcela somente na entrega</p>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- POPUP PIX -->
+<div id="pix-overlay" style="display:none;position:fixed;inset:0;z-index:100;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(240,238,255,0.55);align-items:center;justify-content:center;padding:24px;">
+  <div id="pix-modal" style="background:#fff;border:1px solid rgba(0,0,0,0.07);border-radius:20px;box-shadow:0 24px 80px rgba(109,40,217,0.13),0 4px 20px rgba(0,0,0,0.06);max-width:500px;width:100%;padding:36px 32px 32px;position:relative;font-family:'Inter',sans-serif;animation:modalIn 0.45s cubic-bezier(0.22,1,0.36,1) both;">
+
+    <button onclick="closePix()" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;color:#9ca3af;padding:4px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <p id="pop-eyebrow" style="font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#6d28d9;margin-bottom:14px;"></p>
+    <h2 id="pop-title" style="font-size:22px;font-weight:700;color:#0f1117;letter-spacing:-0.5px;line-height:1.25;margin-bottom:8px;"></h2>
+    <p id="pop-copy" style="font-size:13px;color:#4b5563;line-height:1.75;margin-bottom:24px;"></p>
+
+    <div style="height:1px;background:#e4e7ec;margin-bottom:22px;"></div>
+
+    <p style="font-size:11px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:#9ca3af;margin-bottom:10px;">PIX Copia e Cola</p>
+    <div style="display:flex;gap:8px;align-items:stretch;margin-bottom:20px;">
+      <div style="flex:1;background:#f8f9fb;border:1px solid #e4e7ec;border-radius:10px;padding:11px 14px;overflow:hidden;">
+        <p id="pop-code" style="font-size:10px;font-family:monospace;color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5;margin:0;"></p>
+      </div>
+      <button onclick="copyPix()" id="copy-btn" style="flex-shrink:0;background:#0f1117;color:#fff;border:none;border-radius:10px;padding:0 18px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:background 0.2s;white-space:nowrap;display:flex;align-items:center;gap:6px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copiar
+      </button>
+    </div>
+
+    <div style="background:#f0fdf4;border:1px solid rgba(5,150,105,0.18);border-radius:12px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#25d366" style="flex-shrink:0;margin-top:1px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.11 1.523 5.826L.057 23.571l5.913-1.448A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.373l-.359-.213-3.51.859.884-3.41-.233-.371A9.818 9.818 0 1 1 12 21.818z"/></svg>
+      <p style="font-size:12px;color:#065f46;line-height:1.65;margin:0;">Após o pagamento, envie o <strong>comprovante via WhatsApp</strong> para <strong>Henrique Lopes</strong> confirmar e dar início ao seu projeto. <a href="https://wa.me/5561982081900" target="_blank" style="color:#059669;font-weight:600;text-decoration:none;">Enviar comprovante →</a></p>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<script>
+// Intersection observer para entrada do card
+const card = document.getElementById('main-card');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('card-visible'); obs.unobserve(e.target); } });
+}, { threshold:0.08 });
+obs.observe(card);
+
+const PIX_CODES = {
+  half: '00020101021226700014BR.GOV.BCB.PIX0122marcobrandmc@gmail.com0222Pagamento marcobrading52040000530398654074500.005802BR592551050174 HENRIQUE LOPES D6008BRASILIA62290525QRCCKI3cShM26ncklGGOpcudz63043D58',
+  full: '00020101021226700014BR.GOV.BCB.PIX0122marcobrandmc@gmail.com0222Pagamento marcobrading52040000530398654078700.005802BR592551050174 HENRIQUE LOPES D6008BRASILIA62290525QRCCf2jkctxA0wOG37mXM1zSr6304EDD6'
+};
+
+let isPix = false;
+
+function handleToggle(){
+  isPix = !isPix;
+  document.getElementById('toggle').classList.toggle('pix', isPix);
+  document.getElementById('switch-wrap').classList.toggle('pix', isPix);
+  document.getElementById('label-half').classList.toggle('active', !isPix);
+  document.getElementById('label-pix').classList.toggle('active', isPix);
+
+  if(isPix){
+    document.getElementById('price-label').textContent = 'PIX à vista — Melhor valor';
+    document.getElementById('amount').textContent = '8.700';
+    document.getElementById('price-note').innerHTML = '<strong>Pagamento único</strong> · Economia de R$ 300 em relação ao parcelado';
+    document.getElementById('payment-info-text').innerHTML = 'Pague agora e economize R$ 300. Após a confirmação do PIX, seu projeto é iniciado imediatamente. Prazo de entrega estimado em <strong>30 a 60 dias</strong>.';
+    document.getElementById('cta-desc').textContent = 'Pagamento único e seguro via PIX · Melhor custo-benefício';
+  } else {
+    document.getElementById('price-label').textContent = 'Parcelado — 50% + 50%';
+    document.getElementById('amount').textContent = '4.500';
+    document.getElementById('price-note').innerHTML = '<strong>1ª parcela agora</strong> · 2ª parcela de R$ 4.500 somente na entrega final';
+    document.getElementById('payment-info-text').innerHTML = 'Prazo de entrega estimado em <strong>30 a 60 dias</strong>. O segundo pagamento é realizado <strong>apenas na entrega final do projeto</strong> — somente quando você estiver satisfeito com o resultado.';
+    document.getElementById('cta-desc').textContent = 'Pagamento seguro via PIX · Parcela inicial de R$ 4.500 · 2ª parcela somente na entrega';
+  }
+
+  if(isPix && typeof confetti !== 'undefined'){
+    const r = document.getElementById('toggle').getBoundingClientRect();
+    confetti({ particleCount:80, spread:65, origin:{ x:(r.left+r.width/2)/window.innerWidth, y:(r.top+r.height/2)/window.innerHeight }, colors:['#6d28d9','#059669','#7c3aed','#34d399','#a78bfa','#6366f1'], ticks:220, gravity:1.1, decay:0.93, startVelocity:28 });
+  }
+}
+
+function handleCta(){
+  const mode = isPix ? 'full' : 'half';
+  const eyebrow = isPix ? 'Pacote Completo Premium — PIX à vista' : 'Pacote Completo Premium — 50% + 50%';
+  const title = isPix ? 'Decisão incrível! 🎉' : 'Excelente escolha! 🚀';
+  const copy = isPix
+    ? 'Você garantiu o melhor custo-benefício! Ao pagar à vista, além de economizar R$ 300, já podemos iniciar o projeto imediatamente. O time da Marco Branding Consulting está animado para transformar sua marca em algo inesquecível. ✨'
+    : 'Que começo de parceria incrível! Com o modelo 50/50, você tem total segurança — o segundo pagamento só acontece quando o projeto for entregue e você estiver 100% satisfeito. O time da Marco Branding Consulting já está preparado para construir algo extraordinário junto com você. 🌟';
+
+  document.getElementById('pop-eyebrow').textContent = eyebrow;
+  document.getElementById('pop-title').textContent = title;
+  document.getElementById('pop-copy').textContent = copy;
+  document.getElementById('pop-code').textContent = PIX_CODES[mode];
+
+  const btn = document.getElementById('copy-btn');
+  btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar`;
+  btn.style.background = '#0f1117';
+
+  const overlay = document.getElementById('pix-overlay');
+  overlay.style.display = 'flex';
+  const modal = document.getElementById('pix-modal');
+  modal.style.animation = 'none'; modal.offsetHeight; modal.style.animation = '';
+}
+
+function closePix(){ document.getElementById('pix-overlay').style.display = 'none'; }
+document.getElementById('pix-overlay').addEventListener('click', function(e){ if(e.target===this) closePix(); });
+
+function copyPix(){
+  navigator.clipboard.writeText(document.getElementById('pop-code').textContent).then(()=>{
+    const btn = document.getElementById('copy-btn');
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copiado!`;
+    btn.style.background = '#059669';
+    setTimeout(()=>{ btn.innerHTML=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copiar`; btn.style.background='#0f1117'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
